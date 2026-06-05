@@ -1,4 +1,3 @@
-// Jesse worked on this
 package com.example.noimo.domain
 
 // Holds sensor data

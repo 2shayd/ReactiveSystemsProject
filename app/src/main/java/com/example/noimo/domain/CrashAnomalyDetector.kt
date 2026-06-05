@@ -1,4 +1,3 @@
-// Jesse worked on this
 package com.example.noimo.domain
 
 // Determines if sensor data is a possible crash. If it exceeds values then the detection result

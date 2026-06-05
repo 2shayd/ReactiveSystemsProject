@@ -1,4 +1,3 @@
-// Jesse worked on this
 package com.example.noimo.domain
 
 // Holds relevant info for a detected crash event.
