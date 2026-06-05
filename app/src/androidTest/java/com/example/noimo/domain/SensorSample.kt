@@ -1,3 +1,4 @@
+// Jesse worked on this
 package com.example.noimo.domain
 
 data class SensorSample (
