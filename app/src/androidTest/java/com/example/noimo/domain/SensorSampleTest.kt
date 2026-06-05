@@ -1,3 +1,4 @@
+// Jesse worked on this
 package com.example.noimo.domain
 
 import junit.framework.TestCase.assertEquals
