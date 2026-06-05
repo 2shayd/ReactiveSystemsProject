@@ -1,7 +1,6 @@
-// Jesse worked on this
 package com.example.noimo.domain
 
-import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase
 import org.junit.Test
 
 class SensorSampleTest {
@@ -14,8 +13,8 @@ class SensorSampleTest {
             audioAmplitude = 0.82f
         )
 
-        assertEquals(1000L, sample.timestampMillis)
-        assertEquals(35.5f, sample.accelerationMagnitude, 0.001f)
-        assertEquals(0.82f, sample.audioAmplitude, 0.001f)
+        TestCase.assertEquals(1000L, sample.timestampMillis)
+        TestCase.assertEquals(35.5f, sample.accelerationMagnitude, 0.001f)
+        TestCase.assertEquals(0.82f, sample.audioAmplitude, 0.001f)
     }
 }

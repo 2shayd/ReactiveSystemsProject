@@ -1,7 +1,6 @@
-// Jesse worked on this
 package com.example.noimo.domain
 
-import junit.framework.TestCase.assertTrue
+import junit.framework.TestCase
 import org.junit.Test
 
 class CrashAnomalyDetectorTest {
@@ -18,7 +17,7 @@ class CrashAnomalyDetectorTest {
 
         val result = detector.analyze(sample)
 
-        assertTrue(result is DetectionResult.PossibleCrash)
+        TestCase.assertTrue(result is DetectionResult.PossibleCrash)
     }
 
     @Test
@@ -31,6 +30,6 @@ class CrashAnomalyDetectorTest {
 
         val result = detector.analyze(sample)
 
-        assertTrue(result is DetectionResult.Normal)
+        TestCase.assertTrue(result is DetectionResult.Normal)
     }
 }

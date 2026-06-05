@@ -1,8 +1,6 @@
-// Jesse worked on this
 package com.example.noimo.domain
 
-import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertTrue
+import junit.framework.TestCase
 import org.junit.Test
 
 class DetectionResultTest {
@@ -11,7 +9,7 @@ class DetectionResultTest {
     fun normalIsDetectionResult() {
         val result: DetectionResult = DetectionResult.Normal
 
-        assertTrue(result is DetectionResult.Normal)
+        TestCase.assertTrue(result is DetectionResult.Normal)
     }
 
     @Test
@@ -24,10 +22,10 @@ class DetectionResultTest {
 
         val result = DetectionResult.PossibleCrash(sample)
 
-        assertEquals(sample, result.sample)
-        assertEquals(2000L, result.sample.timestampMillis)
-        assertEquals(45f, result.sample.accelerationMagnitude, 0.001f)
-        assertEquals(0.95f, result.sample.audioAmplitude, 0.001f)
+        TestCase.assertEquals(sample, result.sample)
+        TestCase.assertEquals(2000L, result.sample.timestampMillis)
+        TestCase.assertEquals(45f, result.sample.accelerationMagnitude, 0.001f)
+        TestCase.assertEquals(0.95f, result.sample.audioAmplitude, 0.001f)
     }
 
     @Test
@@ -40,6 +38,6 @@ class DetectionResultTest {
 
         val result: DetectionResult = DetectionResult.PossibleCrash(sample)
 
-        assertTrue(result is DetectionResult.PossibleCrash)
+        TestCase.assertTrue(result is DetectionResult.PossibleCrash)
     }
 }

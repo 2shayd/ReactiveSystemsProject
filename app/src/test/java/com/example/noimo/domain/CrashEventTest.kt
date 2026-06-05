@@ -1,7 +1,6 @@
-// Jesse worked on this
 package com.example.noimo.domain
 
-import junit.framework.TestCase.assertEquals
+import junit.framework.TestCase
 import org.junit.Test
 
 class CrashEventTest {
@@ -14,9 +13,9 @@ class CrashEventTest {
             audioAmplitude = 0.82f
         )
 
-        assertEquals("test-id", crashEvent.id)
-        assertEquals(1000L, crashEvent.detectedAtMillis)
-        assertEquals(35.5f, crashEvent.accelerationMagnitude, 0.001f)
-        assertEquals(0.82f, crashEvent.audioAmplitude, 0.001f)
+        TestCase.assertEquals("test-id", crashEvent.id)
+        TestCase.assertEquals(1000L, crashEvent.detectedAtMillis)
+        TestCase.assertEquals(35.5f, crashEvent.accelerationMagnitude, 0.001f)
+        TestCase.assertEquals(0.82f, crashEvent.audioAmplitude, 0.001f)
     }
 }
