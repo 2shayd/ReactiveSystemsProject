@@ -20,6 +20,26 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+        buildConfigField(
+            "String",
+            "SUPABASE_URL",
+            "\"${project.findProperty("SUPABASE_URL")}\""
+        )
+        buildConfigField(
+            "String",
+            "SUPABASE_ANON_KEY",
+            "\"${project.findProperty("SUPABASE_ANON_KEY")}\""
+        )
+        buildConfigField(
+            "String",
+            "TEST_EMAIL",
+            "\"${project.findProperty("TEST_EMAIL")}\""
+        )
+        buildConfigField(
+            "String",
+            "TEST_PASSWORD",
+            "\"${project.findProperty("TEST_PASSWORD")}\""
+        )
     }
 
     buildTypes {
@@ -37,6 +57,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
