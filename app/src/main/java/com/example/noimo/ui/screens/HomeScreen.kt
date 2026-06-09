@@ -36,6 +36,21 @@ fun HomeScreen() {
             contentDescription = "Frame",
             modifier = Modifier.padding(16.dp)
         )
+        Image(
+            painter = painterResource(id = R.drawable.home_button),
+            contentDescription = "Home",
+            modifier = Modifier.padding(16.dp)
+        )
+        Image(
+            painter = painterResource(id = R.drawable.records_button),
+            contentDescription =  "Records",
+            modifier = Modifier.padding(16.dp)
+        )
+        Image (
+            painter = painterResource(id = R.drawable.profile_button),
+            contentDescription = "Profile",
+            modifier = Modifier.padding(16.dp)
+        )
     }
 
 }
