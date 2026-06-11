@@ -13,7 +13,7 @@ import com.example.noimo.ui.screens.ProfileScreen
 import com.example.noimo.ui.screens.RecordsScreen
 import com.example.noimo.viewmodel.CrashEventViewModel
 import androidx.compose.runtime.getValue
-
+//shayla worked on this
 @Composable
 fun NoiMoNavGraph(navController: NavHostController) {
     NavHost(

@@ -16,6 +16,7 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
+//shayla worked on this
 @Composable
 fun RecordsScreen(
     events: List<CrashEvent>
@@ -64,6 +65,7 @@ fun CrashEventItem(event: CrashEvent) {
     }
 }
 
+//temporary until we have real sensor data with real date
 private fun formatTimestamp(millis: Long): String {
     val formatter = SimpleDateFormat(
         "MMM dd, yyyy h:mm a",
