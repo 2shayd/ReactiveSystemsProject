@@ -13,7 +13,7 @@ import androidx.navigation.compose.rememberNavController
 import com.example.noimo.ui.navigation.NoiMoNavGraph
 import com.example.noimo.ui.navigation.NoiMoBottomBar
 import com.example.noimo.ui.theme.NoiMoTheme
-
+//shayla worked on this
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
