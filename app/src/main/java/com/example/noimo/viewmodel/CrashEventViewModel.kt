@@ -27,14 +27,18 @@ class CrashEventViewModel : ViewModel() {
             CrashEvent(
                 id = "1",
                 detectedAtMillis = System.currentTimeMillis(),
-                accelerationMagnitude = 12.5f,
-                audioAmplitude = 0.82f
+                accelerationMagnitude = 12.5,
+                audioAmplitude = 0.82,
+                latitude = 47.6062,
+                longitude = -122.3321
             ),
             CrashEvent(
                 id = "2",
                 detectedAtMillis = System.currentTimeMillis() - 60000,
-                accelerationMagnitude = 9.8f,
-                audioAmplitude = 0.67f
+                accelerationMagnitude = 9.8,
+                audioAmplitude = 0.67,
+                latitude = 47.6062,
+                longitude = -122.3321
             )
         )
     )
