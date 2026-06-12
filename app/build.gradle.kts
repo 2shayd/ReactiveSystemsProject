@@ -1,8 +1,17 @@
+import java.util.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.compose)
     alias(libs.plugins.ksp)
     alias(libs.plugins.kotlin.serialization)
+}
+
+val localProperties = Properties().apply {
+    val file = rootProject.file("local.properties")
+    if (file.exists()) {
+        file.inputStream().use { load(it) }
+    }
 }
 
 android {
@@ -24,22 +33,22 @@ android {
         buildConfigField(
             "String",
             "SUPABASE_URL",
-            "\"${project.findProperty("SUPABASE_URL")}\""
+            "\"${localProperties.getProperty("SUPABASE_URL") ?: ""}\""
         )
         buildConfigField(
             "String",
             "SUPABASE_ANON_KEY",
-            "\"${project.findProperty("SUPABASE_ANON_KEY")}\""
+            "\"${localProperties.getProperty("SUPABASE_ANON_KEY") ?: ""}\""
         )
         buildConfigField(
             "String",
             "TEST_EMAIL",
-            "\"${project.findProperty("TEST_EMAIL")}\""
+            "\"${localProperties.getProperty("TEST_EMAIL") ?: ""}\""
         )
         buildConfigField(
             "String",
             "TEST_PASSWORD",
-            "\"${project.findProperty("TEST_PASSWORD")}\""
+            "\"${localProperties.getProperty("TEST_PASSWORD") ?: ""}\""
         )
     }
 
