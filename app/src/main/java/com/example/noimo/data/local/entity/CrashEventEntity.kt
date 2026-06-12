@@ -1,5 +1,4 @@
-// Jesse worked on this
-package com.example.noimo.data.local
+package com.example.noimo.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey

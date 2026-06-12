@@ -1,6 +1,6 @@
 package com.example.noimo.data.remote.mapper
 
-import com.example.noimo.data.local.CrashEventEntity
+import com.example.noimo.data.local.entity.CrashEventEntity
 import com.example.noimo.data.remote.dto.CrashEventRemoteDto
 
 fun CrashEventEntity.toRemoteDto(userId: String): CrashEventRemoteDto {

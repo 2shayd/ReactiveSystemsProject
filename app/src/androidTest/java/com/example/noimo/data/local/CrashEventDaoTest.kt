@@ -4,6 +4,8 @@ package com.example.noimo.data.local
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
+import com.example.noimo.data.local.dao.CrashEventDao
+import com.example.noimo.data.local.entity.CrashEventEntity
 import junit.framework.TestCase.assertEquals
 import junit.framework.TestCase.assertTrue
 import kotlinx.coroutines.flow.first

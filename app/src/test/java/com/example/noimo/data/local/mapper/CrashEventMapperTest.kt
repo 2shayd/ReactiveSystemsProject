@@ -1,5 +1,6 @@
-package com.example.noimo.data.local
+package com.example.noimo.data.local.mapper
 
+import com.example.noimo.data.local.entity.CrashEventEntity
 import com.example.noimo.domain.CrashEvent
 import junit.framework.TestCase
 import org.junit.Test

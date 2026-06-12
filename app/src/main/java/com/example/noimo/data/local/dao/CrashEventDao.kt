@@ -1,16 +1,16 @@
-// jesse worked on this
-package com.example.noimo.data.local
+package com.example.noimo.data.local.dao
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import com.example.noimo.data.local.entity.CrashEventEntity
 import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface CrashEventDao {
 
-    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    @Insert(onConflict = OnConflictStrategy.Companion.REPLACE)
     suspend fun insert(event: CrashEventEntity)
 
     @Query("SELECT * FROM crash_events ORDER BY detectedAtMillis DESC")

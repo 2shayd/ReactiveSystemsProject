@@ -1,7 +1,7 @@
 package com.example.noimo.data.repository
 
-import com.example.noimo.data.local.CrashEventDao
-import com.example.noimo.data.local.CrashEventEntity
+import com.example.noimo.data.local.dao.CrashEventDao
+import com.example.noimo.data.local.entity.CrashEventEntity
 import com.example.noimo.domain.CrashEvent
 import io.mockk.coEvery
 import io.mockk.coVerify

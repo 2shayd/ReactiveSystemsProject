@@ -1,4 +1,4 @@
-package com.example.noimo.data.local
+package com.example.noimo.data.local.entity
 
 import junit.framework.TestCase
 import org.junit.Test
