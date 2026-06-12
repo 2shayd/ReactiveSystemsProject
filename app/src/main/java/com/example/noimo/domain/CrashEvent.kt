@@ -4,6 +4,8 @@ package com.example.noimo.domain
 data class CrashEvent (
     val id: String,
     val detectedAtMillis: Long,
-    val accelerationMagnitude: Float,
-    val audioAmplitude: Float
+    val accelerationMagnitude: Double,
+    val audioAmplitude: Double,
+    val latitude: Double?,
+    val longitude: Double?,
 )

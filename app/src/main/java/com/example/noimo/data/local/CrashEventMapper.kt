@@ -7,7 +7,9 @@ fun CrashEventEntity.toDomain(): CrashEvent {
         id = id,
         detectedAtMillis = detectedAtMillis,
         accelerationMagnitude = accelerationMagnitude,
-        audioAmplitude = audioAmplitude
+        audioAmplitude = audioAmplitude,
+        longitude = longitude,
+        latitude = latitude,
     )
 }
 
@@ -19,6 +21,8 @@ fun CrashEvent.toEntity(
         detectedAtMillis = detectedAtMillis,
         accelerationMagnitude = accelerationMagnitude,
         audioAmplitude = audioAmplitude,
+        longitude = longitude,
+        latitude = latitude,
         storedLocallyAtMillis = storedLocallyAtMillis,
         synced = false
     )

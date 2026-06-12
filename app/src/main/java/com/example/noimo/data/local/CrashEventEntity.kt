@@ -9,8 +9,10 @@ import androidx.room.PrimaryKey
 data class CrashEventEntity(
     @PrimaryKey val id: String,
     val detectedAtMillis: Long,
-    val accelerationMagnitude: Float,
-    val audioAmplitude: Float,
+    val accelerationMagnitude: Double,
+    val audioAmplitude: Double,
+    val latitude: Double?,
+    val longitude: Double?,
     val storedLocallyAtMillis: Long,
     val synced: Boolean = false
 )

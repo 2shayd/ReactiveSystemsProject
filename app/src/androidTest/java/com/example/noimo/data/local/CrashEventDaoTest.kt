@@ -42,8 +42,10 @@ class CrashEventDaoTest {
         val event = CrashEventEntity(
             id = "event-1",
             detectedAtMillis = 1000L,
-            accelerationMagnitude = 35f,
-            audioAmplitude = 0.9f,
+            accelerationMagnitude = 35.0,
+            audioAmplitude = 0.9,
+            latitude = 47.6062,
+            longitude = -122.3321,
             storedLocallyAtMillis = 1100L,
             synced = false
         )
@@ -61,18 +63,22 @@ class CrashEventDaoTest {
         val olderEvent = CrashEventEntity(
             id = "event-1",
             detectedAtMillis = 1000L,
-            accelerationMagnitude = 35f,
-            audioAmplitude = 0.9f,
+            accelerationMagnitude = 35.0,
+            audioAmplitude = 0.9,
             storedLocallyAtMillis = 1100L,
+            latitude = 47.6062,
+            longitude = -122.3321,
             synced = false
         )
 
         val newerEvent = CrashEventEntity(
             id = "event-2",
             detectedAtMillis = 3000L,
-            accelerationMagnitude = 35f,
-            audioAmplitude = 0.9f,
+            accelerationMagnitude = 35.0,
+            audioAmplitude = 0.9,
             storedLocallyAtMillis = 3100L,
+            latitude = 47.6062,
+            longitude = -122.3321,
             synced = false
         )
 
@@ -90,17 +96,21 @@ class CrashEventDaoTest {
         val unsyncedEvent = CrashEventEntity(
             id = "event-1",
             detectedAtMillis = 1000L,
-            accelerationMagnitude = 35f,
-            audioAmplitude = 0.9f,
+            accelerationMagnitude = 35.0,
+            audioAmplitude = 0.9,
             storedLocallyAtMillis = 1100L,
+            latitude = 47.6062,
+            longitude = -122.3321,
             synced = false
         )
 
         val syncedEvent = CrashEventEntity(
             id = "event-2",
             detectedAtMillis = 1000L,
-            accelerationMagnitude = 35f,
-            audioAmplitude = 0.9f,
+            accelerationMagnitude = 35.0,
+            audioAmplitude = 0.9,
+            latitude = 47.6062,
+            longitude = -122.3321,
             storedLocallyAtMillis = 1100L,
             synced = true
         )
@@ -120,8 +130,10 @@ class CrashEventDaoTest {
         val event = CrashEventEntity(
             id = "event-1",
             detectedAtMillis = 1000L,
-            accelerationMagnitude = 35f,
-            audioAmplitude = 0.9f,
+            accelerationMagnitude = 35.0,
+            audioAmplitude = 0.9,
+            latitude = 47.6062,
+            longitude = -122.3321,
             storedLocallyAtMillis = 1100L,
             synced = false
         )
