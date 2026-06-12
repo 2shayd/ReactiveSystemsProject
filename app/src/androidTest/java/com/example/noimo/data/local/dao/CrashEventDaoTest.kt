@@ -1,13 +1,11 @@
-// Jesse worked on this
-package com.example.noimo.data.local
+package com.example.noimo.data.local.dao
 
 import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
-import com.example.noimo.data.local.dao.CrashEventDao
+import com.example.noimo.data.local.NoiMoDatabase
 import com.example.noimo.data.local.entity.CrashEventEntity
-import junit.framework.TestCase.assertEquals
-import junit.framework.TestCase.assertTrue
+import junit.framework.TestCase
 import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.test.runTest
 import org.junit.After
@@ -56,8 +54,8 @@ class CrashEventDaoTest {
 
         val events = dao.observeAll().first()
 
-        assertEquals(1, events.size)
-        assertEquals(event, events[0])
+        TestCase.assertEquals(1, events.size)
+        TestCase.assertEquals(event, events[0])
     }
 
     @Test
@@ -89,8 +87,8 @@ class CrashEventDaoTest {
 
         val events = dao.observeAll().first()
 
-        assertEquals("event-2", events[0].id)
-        assertEquals("event-1", events[1].id)
+        TestCase.assertEquals("event-2", events[0].id)
+        TestCase.assertEquals("event-1", events[1].id)
     }
 
     @Test
@@ -122,9 +120,9 @@ class CrashEventDaoTest {
 
         val result = dao.getUnsyncedEvents()
 
-        assertEquals(1, result.size)
-        assertEquals("event-1", result[0].id)
-        assertTrue(!result[0].synced)
+        TestCase.assertEquals(1, result.size)
+        TestCase.assertEquals("event-1", result[0].id)
+        TestCase.assertTrue(!result[0].synced)
     }
 
     @Test
@@ -145,6 +143,6 @@ class CrashEventDaoTest {
 
         val unsyncedEvents = dao.getUnsyncedEvents()
 
-        assertTrue(unsyncedEvents.isEmpty())
+        TestCase.assertTrue(unsyncedEvents.isEmpty())
     }
 }
