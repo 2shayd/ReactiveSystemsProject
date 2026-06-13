@@ -1,7 +1,7 @@
 package com.example.noimo.data.repository
 
-import com.example.noimo.data.local.CrashEventDao
-import com.example.noimo.data.local.CrashEventEntity
+import com.example.noimo.data.local.dao.CrashEventDao
+import com.example.noimo.data.local.entity.CrashEventEntity
 import com.example.noimo.domain.CrashEvent
 import io.mockk.coEvery
 import io.mockk.coVerify
@@ -25,8 +25,10 @@ class RoomCrashEventRepositoryTest {
         val entity = CrashEventEntity(
             id = "event-1",
             detectedAtMillis = 1000L,
-            accelerationMagnitude = 35f,
-            audioAmplitude = 0.9f,
+            accelerationMagnitude = 35.0,
+            audioAmplitude = 0.9,
+            latitude = 47.6062,
+            longitude = -122.3321,
             storedLocallyAtMillis = 1100L,
             synced = false
         )
@@ -38,8 +40,10 @@ class RoomCrashEventRepositoryTest {
         assertEquals(1, result.size)
         assertEquals("event-1", result[0].id)
         assertEquals(1000L, result[0].detectedAtMillis)
-        assertEquals(35f, result[0].accelerationMagnitude, 0.001f)
-        assertEquals(0.9f, result[0].audioAmplitude, 0.001f)
+        assertEquals(35.0, result[0].accelerationMagnitude, 0.001)
+        assertEquals(0.9, result[0].audioAmplitude, 0.001)
+        assertEquals(47.6062, result[0].latitude!!, 0.001)
+        assertEquals(-122.3321, result[0].longitude!!, 0.001)
     }
 
     @Test
@@ -51,8 +55,10 @@ class RoomCrashEventRepositoryTest {
         val event = CrashEvent(
             id = "event-1",
             detectedAtMillis = 1000L,
-            accelerationMagnitude = 35f,
-            audioAmplitude = 0.9f
+            accelerationMagnitude = 35.0,
+            audioAmplitude = 0.9,
+            latitude = 47.6062,
+            longitude = -122.3321,
         )
 
         repository.saveCrashEvent(event)
@@ -63,8 +69,10 @@ class RoomCrashEventRepositoryTest {
 
         assertEquals("event-1", insertedEntity.id)
         assertEquals(1000L, insertedEntity.detectedAtMillis)
-        assertEquals(35f, insertedEntity.accelerationMagnitude, 0.001f)
-        assertEquals(0.9f, insertedEntity.audioAmplitude, 0.001f)
+        assertEquals(35.0, insertedEntity.accelerationMagnitude, 0.001)
+        assertEquals(0.9, insertedEntity.audioAmplitude, 0.001)
+        assertEquals(47.6062, insertedEntity.latitude!!, 0.001)
+        assertEquals(-122.3321, insertedEntity.longitude!!, 0.001)
         assertFalse(insertedEntity.synced)
     }
 
@@ -73,9 +81,11 @@ class RoomCrashEventRepositoryTest {
         val entity = CrashEventEntity(
             id = "event-1",
             detectedAtMillis = 1000L,
-            accelerationMagnitude = 35f,
-            audioAmplitude = 0.9f,
+            accelerationMagnitude = 35.0,
+            audioAmplitude = 0.9,
             storedLocallyAtMillis = 1100L,
+            latitude = 47.6062,
+            longitude = -122.3321,
             synced = false
         )
 

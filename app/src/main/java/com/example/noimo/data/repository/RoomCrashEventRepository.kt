@@ -1,9 +1,9 @@
 // Jesse worked on this
 package com.example.noimo.data.repository
 
-import com.example.noimo.data.local.CrashEventDao
-import com.example.noimo.data.local.toDomain
-import com.example.noimo.data.local.toEntity
+import com.example.noimo.data.local.dao.CrashEventDao
+import com.example.noimo.data.local.mapper.toDomain
+import com.example.noimo.data.local.mapper.toEntity
 import com.example.noimo.domain.CrashEvent
 import com.example.noimo.domain.CrashEventRepository
 import kotlinx.coroutines.flow.Flow

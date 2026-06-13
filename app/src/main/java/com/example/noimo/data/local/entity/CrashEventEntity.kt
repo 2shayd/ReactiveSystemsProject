@@ -1,5 +1,4 @@
-// Jesse worked on this
-package com.example.noimo.data.local
+package com.example.noimo.data.local.entity
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
@@ -9,8 +8,10 @@ import androidx.room.PrimaryKey
 data class CrashEventEntity(
     @PrimaryKey val id: String,
     val detectedAtMillis: Long,
-    val accelerationMagnitude: Float,
-    val audioAmplitude: Float,
+    val accelerationMagnitude: Double,
+    val audioAmplitude: Double,
+    val latitude: Double?,
+    val longitude: Double?,
     val storedLocallyAtMillis: Long,
     val synced: Boolean = false
 )
