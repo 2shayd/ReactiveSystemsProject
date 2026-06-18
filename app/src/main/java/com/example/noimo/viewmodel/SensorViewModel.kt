@@ -19,7 +19,7 @@ import java.util.UUID
 // Vitoria worked on this.
 class SensorViewModel(
     private val crashEventDao: CrashEventDao,
-    private val crashEventRemoteDataSensorViewModel: CrashEventRemoteDataSource,
+    private val crashEventRemoteDataSource: CrashEventRemoteDataSource,
     private val currentUserProvider: CurrentUserProvider
 ) : ViewModel() {
 
