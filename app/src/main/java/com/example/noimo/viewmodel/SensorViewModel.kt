@@ -1,15 +1,27 @@
 package com.example.noimo.viewmodel
 
+import android.util.Log
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
+import com.example.noimo.data.local.dao.CrashEventDao
+import com.example.noimo.data.local.entity.CrashEventEntity
+import com.example.noimo.data.remote.datasource.CrashEventRemoteDataSource
+import com.example.noimo.data.remote.mapper.toRemoteDto
 import com.example.noimo.domain.CrashAnomalyDetector
 import com.example.noimo.domain.DetectionResult
 import com.example.noimo.domain.SensorSample
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.launch
+import java.util.UUID
 
 // Vitoria worked on this.
-class SensorViewModel : ViewModel() {
+class SensorViewModel(
+    private val crashEventDao: CrashEventDao,
+    private val crashEventRemoteDataSensorViewModel: CrashEventRemoteDataSource,
+    private val currentUserProvider: CurrentUserProvider
+) : ViewModel() {
 
     private val detector = CrashAnomalyDetector()
 
@@ -58,5 +70,40 @@ class SensorViewModel : ViewModel() {
         )
 
         _detectionResult.value = detector.analyze(sample)
+    }
+
+    fun onCrashDetected(sample: SensorSample) {
+        viewModelScope.launch {
+            val userId = currentUserProvider.getCurrentUserId()
+                ?: return@launch
+
+            val id = UUID.randomUUID().toString()
+            val storedLocallyAtMillis = System.currentTimeMillis()
+
+            val entity = CrashEventEntity(
+                id = id,
+                detectedAtMillis = sample.timestampMillis,
+                accelerationMagnitude = sample.accelerationMagnitude,
+                audioAmplitude = sample.audioAmplitude,
+                latitude = null,
+                longitude = null,
+                storedLocallyAtMillis = storedLocallyAtMillis,
+                synced = false
+            )
+
+            crashEventDao.insert(entity)
+
+            try {
+                val dto = entity.toRemoteDto(userId = userId)
+
+                crashEventRemoteDataSource.uploadCrashEvents(
+                    listOf(dto)
+                )
+
+                crashEventDao.markSynced(listOf(entity.id))
+            } catch (e: Exception) {
+                Log.e("SensorViewModel", "Failed to upload remote crash event.")
+            }
+        }
     }
 }
