@@ -14,6 +14,7 @@ import androidx.navigation.compose.rememberNavController
 import androidx.room.Room
 import com.example.noimo.data.local.NoiMoDatabase
 import com.example.noimo.data.remote.SupabaseClientProvider
+import com.example.noimo.data.remote.auth.SupabaseAuthDataSource
 import com.example.noimo.data.remote.auth.SupabaseCurrentUserProvider
 import com.example.noimo.data.remote.datasource.SupabaseCrashEventRemoteDataSource
 import com.example.noimo.ui.navigation.NoiMoNavGraph
@@ -27,6 +28,10 @@ class MainActivity : ComponentActivity() {
 
     private lateinit var database: NoiMoDatabase
 
+    val authDataSource = SupabaseAuthDataSource(
+        SupabaseClientProvider.client
+    )
+
     private val sensorViewModel: SensorViewModel by viewModels {
         SensorViewModelFactory(
             crashEventDao = database.crashEventDao(),
@@ -35,7 +40,8 @@ class MainActivity : ComponentActivity() {
             ),
             currentUserProvider = SupabaseCurrentUserProvider(
                 SupabaseClientProvider.client
-            )
+            ),
+            authDataSource = authDataSource
         )
     }
     override fun onCreate(savedInstanceState: Bundle?) {

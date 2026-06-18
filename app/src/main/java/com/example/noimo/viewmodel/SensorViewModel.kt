@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.noimo.data.local.dao.CrashEventDao
 import com.example.noimo.data.local.entity.CrashEventEntity
 import com.example.noimo.data.remote.auth.CurrentUserProvider
+import com.example.noimo.data.remote.auth.SupabaseAuthDataSource
 import com.example.noimo.data.remote.datasource.CrashEventRemoteDataSource
 import com.example.noimo.data.remote.mapper.toRemoteDto
 import com.example.noimo.domain.CrashAnomalyDetector
@@ -21,7 +22,8 @@ import java.util.UUID
 class SensorViewModel(
     private val crashEventDao: CrashEventDao,
     private val crashEventRemoteDataSource: CrashEventRemoteDataSource,
-    private val currentUserProvider: CurrentUserProvider
+    private val currentUserProvider: CurrentUserProvider,
+    private val authDataSource: SupabaseAuthDataSource
 ) : ViewModel() {
 
     private val detector = CrashAnomalyDetector()
@@ -70,13 +72,37 @@ class SensorViewModel(
             audioAmplitude = audioAmplitude
         )
 
-        _detectionResult.value = detector.analyze(sample)
+        val result = detector.analyze(sample)
+
+        _detectionResult.value = result
+
+        if (result is DetectionResult.PossibleCrash) {
+            onCrashDetected(result.sample)
+        }
     }
 
     fun onCrashDetected(sample: SensorSample) {
         viewModelScope.launch {
-            val userId = currentUserProvider.getCurrentUserId()
-                ?: return@launch
+            //val userId = currentUserProvider.getCurrentUserId()
+              //  ?: return@launch
+
+            var userId = currentUserProvider.getCurrentUserId()
+
+            if (userId == null) {
+                authDataSource.signInTestUser()
+                userId = currentUserProvider.getCurrentUserId()
+            }
+
+            if (userId == null) {
+                Log.e("SensorViewModel", "User ID is still null after sign in")
+                return@launch
+            }
+
+            Log.d("SensorViewModel", "Current user id: $userId")
+
+            Log.d("SensorViewModel", "Current user id: $userId")
+
+            if (userId == null) return@launch
 
             val id = UUID.randomUUID().toString()
             val storedLocallyAtMillis = System.currentTimeMillis()
