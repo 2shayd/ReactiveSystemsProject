@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.noimo.data.local.dao.CrashEventDao
 import com.example.noimo.data.local.entity.CrashEventEntity
+import com.example.noimo.data.remote.auth.CurrentUserProvider
 import com.example.noimo.data.remote.datasource.CrashEventRemoteDataSource
 import com.example.noimo.data.remote.mapper.toRemoteDto
 import com.example.noimo.domain.CrashAnomalyDetector

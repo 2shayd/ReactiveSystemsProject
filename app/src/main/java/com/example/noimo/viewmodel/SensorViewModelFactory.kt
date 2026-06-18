@@ -3,6 +3,7 @@ package com.example.noimo.viewmodel
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.noimo.data.local.dao.CrashEventDao
+import com.example.noimo.data.remote.auth.CurrentUserProvider
 import com.example.noimo.data.remote.datasource.CrashEventRemoteDataSource
 
 class SensorViewModelFactory(
