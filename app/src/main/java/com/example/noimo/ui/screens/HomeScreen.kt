@@ -16,6 +16,9 @@ import androidx.compose.ui.unit.dp
 import com.example.noimo.domain.DetectionResult
 import com.example.noimo.viewmodel.SensorViewModel
 import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.compose.ui.platform.LocalContext
+import com.example.noimo.data.sensors.SensorTrackingManager
+import androidx.compose.foundation.layout.fillMaxWidth
 
 // Shayla worked on the original HomeScreen.
 // Vitoria updated this screen to connect SensorViewModel and display sensor values.
@@ -26,6 +29,15 @@ fun HomeScreen(
     val acceleration by sensorViewModel.accelerationMagnitude.collectAsState()
     val audio by sensorViewModel.audioAmplitude.collectAsState()
     val detectionResult by sensorViewModel.detectionResult.collectAsState()
+    val dataSourceLabel by sensorViewModel.dataSourceLabel.collectAsState()
+    val context = LocalContext.current
+
+    val sensorTrackingManager = SensorTrackingManager(context) { acceleration ->
+        sensorViewModel.updateSensorValues(
+            accelerationMagnitude = acceleration,
+            audioAmplitude = audio
+        )
+    }
 
     Column(
         modifier = Modifier
@@ -34,19 +46,49 @@ fun HomeScreen(
     ) {
         Text(
             text = "Welcome to NoiMo!",
-            style = MaterialTheme.typography.headlineMedium
+            style = MaterialTheme.typography.headlineLarge
         )
 
+        Spacer(modifier = Modifier.height(24.dp))
+
+        Text(
+            text = "Acceleration: ${"%.2f".format(acceleration)}",
+            style = MaterialTheme.typography.titleMedium
+        )
+
+        Text(
+            text = "Audio Amplitude: ${"%.2f".format(audio)}",
+            style = MaterialTheme.typography.titleMedium
+        )
+
+        Text(
+            text = "Detection Result: ${formatDetectionResult(detectionResult)}",
+            style = MaterialTheme.typography.titleMedium
+        )
+
+        Text(
+            text = "Mode: $dataSourceLabel",
+            style = MaterialTheme.typography.titleMedium
+        )
         Spacer(modifier = Modifier.height(16.dp))
 
-        Text(text = "Acceleration: ${"%.2f".format(acceleration)}")
-        Text(text = "Audio Amplitude: ${"%.2f".format(audio)}")
-        Text(text = "Detection Result: ${formatDetectionResult(detectionResult)}")
+        Button(
+            modifier = Modifier.fillMaxWidth(),
+            onClick = {
+                sensorViewModel.setLiveTracking()
+                sensorTrackingManager.startTracking()
+            }
+        ) {
+            Text("Start Sensor Tracking")
+        }
 
         Spacer(modifier = Modifier.height(16.dp))
 
         Button(
+            modifier = Modifier.fillMaxWidth(),
             onClick = {
+                sensorViewModel.setSimulatedNormal()
+
                 sensorViewModel.updateSensorValues(
                     accelerationMagnitude = 3.0f,
                     audioAmplitude = 20.0f
@@ -56,10 +98,13 @@ fun HomeScreen(
             Text("Simulate Normal Values")
         }
 
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(16.dp))
 
         Button(
+            modifier = Modifier.fillMaxWidth(),
             onClick = {
+                sensorViewModel.setSimulatedCrash()
+
                 sensorViewModel.updateSensorValues(
                     accelerationMagnitude = 50.0f,
                     audioAmplitude = 100.0f

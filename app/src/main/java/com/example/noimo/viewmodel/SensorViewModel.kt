@@ -27,6 +27,22 @@ class SensorViewModel : ViewModel() {
     val detectionResult: StateFlow<DetectionResult> =
         _detectionResult.asStateFlow()
 
+    private val _dataSourceLabel =
+        MutableStateFlow("No Data")
+    val dataSourceLabel: StateFlow<String> = _dataSourceLabel.asStateFlow()
+
+    fun setLiveTracking() {
+        _dataSourceLabel.value = "Live Sensor Tracking"
+    }
+
+    fun setSimulatedNormal() {
+        _dataSourceLabel.value = "Simulated Normal Test"
+    }
+
+    fun setSimulatedCrash() {
+        _dataSourceLabel.value = "Simulated Crash Test"
+    }
+
     fun updateSensorValues(
         accelerationMagnitude: Float,
         audioAmplitude: Float
