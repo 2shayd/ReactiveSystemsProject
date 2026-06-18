@@ -26,12 +26,12 @@ class SensorViewModel(
 
     private val detector = CrashAnomalyDetector()
 
-    private val _accelerationMagnitude = MutableStateFlow(0f)
-    val accelerationMagnitude: StateFlow<Float> =
+    private val _accelerationMagnitude = MutableStateFlow(0.0)
+    val accelerationMagnitude: StateFlow<Double> =
         _accelerationMagnitude.asStateFlow()
 
-    private val _audioAmplitude = MutableStateFlow(0f)
-    val audioAmplitude: StateFlow<Float> =
+    private val _audioAmplitude = MutableStateFlow(0.0)
+    val audioAmplitude: StateFlow<Double> =
         _audioAmplitude.asStateFlow()
 
     private val _detectionResult =
@@ -57,8 +57,8 @@ class SensorViewModel(
     }
 
     fun updateSensorValues(
-        accelerationMagnitude: Float,
-        audioAmplitude: Float
+        accelerationMagnitude: Double,
+        audioAmplitude: Double
     ) {
 
         _accelerationMagnitude.value = accelerationMagnitude
