@@ -11,7 +11,7 @@ import kotlin.math.sqrt
 // Tracks real accelerometer values from the device.
 class SensorTrackingManager(
     context: Context,
-    private val onAccelerationChanged: (Float) -> Unit
+    private val onAccelerationChanged: (Double) -> Unit
 ) : SensorEventListener {
 
     private val sensorManager =
@@ -41,7 +41,7 @@ class SensorTrackingManager(
             val y = event.values[1]
             val z = event.values[2]
 
-            val magnitude = sqrt(x * x + y * y + z * z)
+            val magnitude = sqrt(x * x + y * y + z * z).toDouble()
 
             if (magnitude > 12f) {
                 onAccelerationChanged(magnitude)

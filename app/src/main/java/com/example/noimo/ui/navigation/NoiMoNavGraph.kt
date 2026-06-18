@@ -13,15 +13,17 @@ import com.example.noimo.ui.screens.ProfileScreen
 import com.example.noimo.ui.screens.RecordsScreen
 import com.example.noimo.viewmodel.CrashEventViewModel
 import androidx.compose.runtime.getValue
+import com.example.noimo.viewmodel.SensorViewModel
+
 //shayla worked on this
 @Composable
-fun NoiMoNavGraph(navController: NavHostController) {
+fun NoiMoNavGraph(navController: NavHostController, sensorViewModel: SensorViewModel) {
     NavHost(
         navController = navController,
         startDestination = NoiMoRoute.Home.route
     ) {
         composable(NoiMoRoute.Home.route) {
-            HomeScreen()
+            HomeScreen(sensorViewModel = sensorViewModel)
         }
 
         composable(NoiMoRoute.Records.route) {
