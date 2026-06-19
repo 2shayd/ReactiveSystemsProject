@@ -11,8 +11,8 @@ class CrashAnomalyDetectorTest {
     fun abnormalSampleReturnsCrash() {
         val sample = SensorSample(
             timestampMillis = 1000L,
-            accelerationMagnitude = 35f,
-            audioAmplitude = 0.9f
+            accelerationMagnitude = 35.0,
+            audioAmplitude = 0.9
         )
 
         val result = detector.analyze(sample)
@@ -24,8 +24,8 @@ class CrashAnomalyDetectorTest {
     fun normalSampleReturnsNormal() {
         val sample = SensorSample(
             timestampMillis = 1000L,
-            accelerationMagnitude = 9.8f,
-            audioAmplitude = 0.2f
+            accelerationMagnitude = 9.8,
+            audioAmplitude = 0.2
         )
 
         val result = detector.analyze(sample)

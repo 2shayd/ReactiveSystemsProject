@@ -16,24 +16,24 @@ class DetectionResultTest {
     fun possibleCrashStoresSensorSample() {
         val sample = SensorSample(
             timestampMillis = 2000L,
-            accelerationMagnitude = 45f,
-            audioAmplitude = 0.95f
+            accelerationMagnitude = 45.0,
+            audioAmplitude = 0.95
         )
 
         val result = DetectionResult.PossibleCrash(sample)
 
         TestCase.assertEquals(sample, result.sample)
         TestCase.assertEquals(2000L, result.sample.timestampMillis)
-        TestCase.assertEquals(45f, result.sample.accelerationMagnitude, 0.001f)
-        TestCase.assertEquals(0.95f, result.sample.audioAmplitude, 0.001f)
+        TestCase.assertEquals(45.0, result.sample.accelerationMagnitude)
+        TestCase.assertEquals(0.95, result.sample.audioAmplitude)
     }
 
     @Test
     fun possibleCrashIsDetectionResult() {
         val sample = SensorSample(
             timestampMillis = 2000L,
-            accelerationMagnitude = 45f,
-            audioAmplitude = 0.95f
+            accelerationMagnitude = 45.0,
+            audioAmplitude = 0.95
         )
 
         val result: DetectionResult = DetectionResult.PossibleCrash(sample)
