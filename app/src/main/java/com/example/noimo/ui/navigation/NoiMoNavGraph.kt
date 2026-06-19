@@ -17,7 +17,11 @@ import com.example.noimo.viewmodel.SensorViewModel
 
 //shayla worked on this
 @Composable
-fun NoiMoNavGraph(navController: NavHostController, sensorViewModel: SensorViewModel) {
+fun NoiMoNavGraph(
+    navController: NavHostController,
+    sensorViewModel: SensorViewModel,
+    crashEventViewModel: CrashEventViewModel
+) {
     NavHost(
         navController = navController,
         startDestination = NoiMoRoute.Home.route
@@ -27,8 +31,7 @@ fun NoiMoNavGraph(navController: NavHostController, sensorViewModel: SensorViewM
         }
 
         composable(NoiMoRoute.Records.route) {
-            val viewModel: CrashEventViewModel = viewModel()
-            val events by viewModel.events.collectAsState()
+            val events by crashEventViewModel.events.collectAsState()
 
             RecordsScreen(events = events)
         }

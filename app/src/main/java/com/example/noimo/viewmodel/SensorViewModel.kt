@@ -83,8 +83,6 @@ class SensorViewModel(
 
     fun onCrashDetected(sample: SensorSample) {
         viewModelScope.launch {
-            //val userId = currentUserProvider.getCurrentUserId()
-              //  ?: return@launch
 
             var userId = currentUserProvider.getCurrentUserId()
 
@@ -97,8 +95,6 @@ class SensorViewModel(
                 Log.e("SensorViewModel", "User ID is still null after sign in")
                 return@launch
             }
-
-            Log.d("SensorViewModel", "Current user id: $userId")
 
             Log.d("SensorViewModel", "Current user id: $userId")
 
