@@ -24,13 +24,15 @@ import androidx.compose.foundation.layout.fillMaxWidth
 // Vitoria updated this screen to connect SensorViewModel and display sensor values.
 @Composable
 fun HomeScreen(
-    sensorViewModel: SensorViewModel = viewModel()
+    sensorViewModel: SensorViewModel
 ) {
     val acceleration by sensorViewModel.accelerationMagnitude.collectAsState()
     val audio by sensorViewModel.audioAmplitude.collectAsState()
     val detectionResult by sensorViewModel.detectionResult.collectAsState()
     val dataSourceLabel by sensorViewModel.dataSourceLabel.collectAsState()
     val context = LocalContext.current
+
+
 
     val sensorTrackingManager = SensorTrackingManager(context) { acceleration ->
         sensorViewModel.updateSensorValues(
@@ -90,8 +92,8 @@ fun HomeScreen(
                 sensorViewModel.setSimulatedNormal()
 
                 sensorViewModel.updateSensorValues(
-                    accelerationMagnitude = 3.0f,
-                    audioAmplitude = 20.0f
+                    accelerationMagnitude = 3.0,
+                    audioAmplitude = 20.0
                 )
             }
         ) {
@@ -106,8 +108,8 @@ fun HomeScreen(
                 sensorViewModel.setSimulatedCrash()
 
                 sensorViewModel.updateSensorValues(
-                    accelerationMagnitude = 50.0f,
-                    audioAmplitude = 100.0f
+                    accelerationMagnitude = 50.0,
+                    audioAmplitude = 100.0
                 )
             }
         ) {
