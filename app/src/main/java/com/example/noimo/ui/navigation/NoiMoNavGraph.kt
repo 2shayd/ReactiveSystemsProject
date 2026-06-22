@@ -2,7 +2,8 @@ package com.example.noimo.ui.navigation
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
-import androidx.lifecycle.viewmodel.compose.viewModel
+import androidx.navigation.NavType
+import androidx.navigation.navArgument
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -33,11 +34,27 @@ fun NoiMoNavGraph(
         composable(NoiMoRoute.Records.route) {
             val events by crashEventViewModel.events.collectAsState()
 
-            RecordsScreen(events = events)
+            RecordsScreen(
+                events = events,
+                onEventClick = { eventId ->
+                    navController.navigate(NoiMoRoute.IncidentDetail.createRoute(eventId))
+                }
+            )
         }
 
-        composable(NoiMoRoute.IncidentDetail.route) {
-            IncidentDetailScreen()
+        composable(
+            route = NoiMoRoute.IncidentDetail.route,
+            arguments = listOf(
+                navArgument("eventId") {
+                    type = NavType.StringType
+                }
+            )
+        ) { backStackEntry ->
+            val eventId = backStackEntry.arguments?.getString("eventId")
+            val events by crashEventViewModel.events.collectAsState()
+            val selectedEvent = events.find { it.id == eventId }
+
+            IncidentDetailScreen(event = selectedEvent)
         }
 
         composable(NoiMoRoute.Profile.route) {

@@ -1,5 +1,6 @@
 package com.example.noimo.ui.screens
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
@@ -16,10 +17,11 @@ import java.text.SimpleDateFormat
 import java.util.Date
 import java.util.Locale
 
-//shayla worked on this
+// shayla worked on this
 @Composable
 fun RecordsScreen(
-    events: List<CrashEvent>
+    events: List<CrashEvent>,
+    onEventClick: (String) -> Unit
 ) {
     Column(
         modifier = Modifier
@@ -31,25 +33,45 @@ fun RecordsScreen(
             style = MaterialTheme.typography.headlineMedium
         )
 
-        LazyColumn {
-            items(events) { event ->
-                CrashEventItem(event)
+        if (events.isEmpty()) {
+            Text(
+                text = "No crash events recorded yet.",
+                modifier = Modifier.padding(top = 16.dp),
+                style = MaterialTheme.typography.bodyMedium
+            )
+        } else {
+            LazyColumn(
+                modifier = Modifier.padding(top = 8.dp)
+            ) {
+                items(events) { event ->
+                    CrashEventItem(
+                        event = event,
+                        onClick = {
+                            onEventClick(event.id)
+                        }
+                    )
+                }
             }
         }
     }
 }
 
 @Composable
-fun CrashEventItem(event: CrashEvent) {
+fun CrashEventItem(
+    event: CrashEvent,
+    onClick: () -> Unit
+) {
     Card(
-        modifier = Modifier.padding(vertical = 8.dp)
+        modifier = Modifier
+            .padding(vertical = 8.dp)
+            .clickable { onClick() }
     ) {
         Column(
             modifier = Modifier.padding(16.dp)
         ) {
             Text(
                 text = "Detected: ${formatTimestamp(event.detectedAtMillis)}",
-                style = MaterialTheme.typography.bodyMedium
+                style = MaterialTheme.typography.titleMedium
             )
 
             Text(
@@ -61,15 +83,17 @@ fun CrashEventItem(event: CrashEvent) {
                 text = "Audio Amplitude: ${event.audioAmplitude}",
                 style = MaterialTheme.typography.bodyMedium
             )
+
+            Text(
+                text = "Tap to view details",
+                modifier = Modifier.padding(top = 8.dp),
+                style = MaterialTheme.typography.bodySmall
+            )
         }
     }
 }
 
-//temporary until we have real sensor data with real date
 private fun formatTimestamp(millis: Long): String {
-    val formatter = SimpleDateFormat(
-        "MMM dd, yyyy h:mm a",
-        Locale.getDefault()
-    )
+    val formatter = SimpleDateFormat("MMM dd, yyyy h:mm a", Locale.getDefault())
     return formatter.format(Date(millis))
 }
